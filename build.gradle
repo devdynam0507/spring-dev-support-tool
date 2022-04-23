@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'org.springsuppotr.tools'
+group 'org.springsupport.tools'
 version '1.0-SNAPSHOT'
 
 repositories {

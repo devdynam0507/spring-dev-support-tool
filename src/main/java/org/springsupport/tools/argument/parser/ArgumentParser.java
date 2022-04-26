@@ -1,5 +1,6 @@
-package org.springsupport.tools.argument;
+package org.springsupport.tools.argument.parser;
 
+import org.springsupport.tools.argument.dto.ArgumentMetadata;
 import org.springsupport.tools.argument.exception.ArgumentParseException;
 
 import javax.validation.constraints.NotNull;

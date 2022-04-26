@@ -1,6 +1,6 @@
 package org.springsupport.tools.argument;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.springsupport.tools.argument.resolver.ArgumentResolver;
 
 public class ArgumentResolverTest {
 

@@ -1,4 +1,4 @@
-package org.springsupport.tools.argument;
+package org.springsupport.tools.argument.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

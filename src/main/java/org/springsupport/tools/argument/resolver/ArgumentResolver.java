@@ -1,4 +1,4 @@
-package org.springsupport.tools.argument;
+package org.springsupport.tools.argument.resolver;
 
 import javax.validation.constraints.NotNull;
 

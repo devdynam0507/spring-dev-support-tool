@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.springsupport.tools.BeanDefinitionTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-04-26T08:18:18" hostname="codestoryui-iMac.local" time="0.125">
+  <properties/>
+  <testcase name="Spring Bean이 정상적으로 등록되는지" classname="org.springsupport.tools.BeanDefinitionTest" time="0.125"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

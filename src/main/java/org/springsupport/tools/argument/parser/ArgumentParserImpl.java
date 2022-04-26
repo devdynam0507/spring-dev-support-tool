@@ -30,7 +30,8 @@ public class ArgumentParserImpl implements ArgumentParser {
             throw new ArgumentParseException("Argument is null", null);
         }
 
-        Matcher argsPatternMatcher = getMatcher(arg);
+        Matcher argsPatternMatcher = Pattern.compile(argumentRegex)
+                                            .matcher(arg);
         List<ArgumentMetadata> parsedMetadataResults = new ArrayList<>();
         if(!argsPatternMatcher.find() || argsPatternMatcher.groupCount() < 2) {
             throw new ArgumentParseException(arg + " is invalid argument", arg);
@@ -39,11 +40,6 @@ public class ArgumentParserImpl implements ArgumentParser {
         String argParams = argsPatternMatcher.group(2);
         parsedMetadataResults.add(new ArgumentMetadata(argType, argParams));
         return parsedMetadataResults;
-    }
-
-    private Matcher getMatcher(String arg) {
-        Pattern argumentPattern = Pattern.compile(argumentRegex);
-        return argumentPattern.matcher(arg);
     }
 
 }

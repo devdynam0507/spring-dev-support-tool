@@ -1,4 +1,4 @@
-package org.springsupport.tools;
+package org.springsupport.tools.spring;
 
 import lombok.Data;
 import org.junit.jupiter.api.Assertions;
@@ -9,12 +9,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-public class BeanDefinitionTest {
+public class ConfigurationBeanDefinitionTest {
 
     @Test
     @DisplayName("Spring Bean이 정상적으로 등록되는지")
     void beanRegisterSuccess() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(TestConfiguration.class);
+
         TestBean testBean = (TestBean) ac.getBean("testBean");
 
         Assertions.assertEquals(testBean.getClass(), TestBean.class);

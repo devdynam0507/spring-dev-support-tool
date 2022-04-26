@@ -1,12 +1,13 @@
 package org.springsupport.tools.spring;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ComponentScanTest {
 
@@ -17,7 +18,7 @@ public class ComponentScanTest {
 
         Object testComponent = ac.getBean("componentScanTest.TestComponent");
 
-        Assertions.assertEquals(testComponent.getClass(), TestComponent.class);
+        assertEquals(testComponent.getClass(), TestComponent.class);
     }
 
     @ComponentScan(basePackageClasses = {ComponentScanTest.class})

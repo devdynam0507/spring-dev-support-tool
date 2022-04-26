@@ -18,8 +18,8 @@ configurations {
 }
 
 dependencies {
-	implementation 'org.springframework:spring-core:5.3.19'
-	implementation 'org.springframework:spring-context:5.3.19'
+    implementation 'org.springframework:spring-core:5.3.19'
+    implementation 'org.springframework:spring-context:5.3.19'
 
     implementation 'javax.validation:validation-api:2.0.1.Final'
 

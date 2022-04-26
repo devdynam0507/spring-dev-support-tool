@@ -1,13 +1,14 @@
 package org.springsupport.tools.spring;
 
 import lombok.Data;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ConfigurationBeanDefinitionTest {
 
@@ -18,7 +19,7 @@ public class ConfigurationBeanDefinitionTest {
 
         TestBean testBean = (TestBean) ac.getBean("testBean");
 
-        Assertions.assertEquals(testBean.getClass(), TestBean.class);
+        assertEquals(testBean.getClass(), TestBean.class);
     }
 
     @Data

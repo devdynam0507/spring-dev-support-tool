@@ -1,4 +1,0 @@
-org/springsupport/tools/BeanDefinitionTest.java
- org.springsupport.tools.BeanDefinitionTest
- org.springsupport.tools.BeanDefinitionTest$TestBean
- org.springsupport.tools.BeanDefinitionTest$TestConfiguration

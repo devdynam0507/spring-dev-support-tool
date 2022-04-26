@@ -180,9 +180,7 @@ public class ArgumentParserTest {
     void extractArgsInputNull() throws ArgumentParseException {
         String arg = null;
 
-        List<ArgumentMetadata> parsed = argumentParser.parse(arg);
-
-        assertEquals(parsed.size(), 0);
+        assertThrows(ArgumentParseException.class, () -> argumentParser.parse(arg));
     }
 
     @Test
@@ -190,9 +188,7 @@ public class ArgumentParserTest {
     void extractInvalidArgs() throws ArgumentParseException {
         String arg = "adadad";
 
-        List<ArgumentMetadata> parsed = argumentParser.parse(arg);
-
-        assertEquals(parsed.size(), 0);
+        assertThrows(ArgumentParseException.class, () -> argumentParser.parse(arg));
     }
 
     @Test
@@ -200,9 +196,7 @@ public class ArgumentParserTest {
     void extractInvalidEmptyArgs() throws ArgumentParseException {
         String arg = "";
 
-        List<ArgumentMetadata> parsed = argumentParser.parse(arg);
-
-        assertEquals(parsed.size(), 0);
+        assertThrows(ArgumentParseException.class, () -> argumentParser.parse(arg));
     }
 
 }

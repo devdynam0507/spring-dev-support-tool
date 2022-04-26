@@ -25,14 +25,14 @@ public class ArgumentParserImpl implements ArgumentParser {
 
     @Override
     public List<ArgumentMetadata> parse(@NotNull String arg) throws ArgumentParseException {
-        List<ArgumentMetadata> parsedMetadataResults = new ArrayList<>();
         if(arg == null) {
-            return parsedMetadataResults;
+            throw new ArgumentParseException("Argument is null", null);
         }
 
         Matcher argsPatternMatcher = getMatcher(arg);
+        List<ArgumentMetadata> parsedMetadataResults = new ArrayList<>();
         if(!argsPatternMatcher.find() || argsPatternMatcher.groupCount() < 2) {
-            return parsedMetadataResults;
+            throw new ArgumentParseException(arg + " is invalid argument", arg);
         }
         String argType = argsPatternMatcher.group(1);
         String argParams = argsPatternMatcher.group(2);

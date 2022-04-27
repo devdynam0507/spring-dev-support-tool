@@ -1,18 +1,16 @@
-package org.springsupport.tools.argument;
+package org.springsupport.tools.argument.parser;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springsupport.tools.argument.dto.ArgumentMetadata;
 import org.springsupport.tools.argument.exception.ArgumentParseException;
-import org.springsupport.tools.argument.parser.ArgumentParser;
-import org.springsupport.tools.argument.parser.ArgumentParserImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ArgumentParserTest {
+public class ArgumentContextParserTest {
 
-    private ArgumentParser argumentParser = new ArgumentParserImpl();
+    private ArgumentParser argumentParser = new ArgumentContextParser();
 
     @Test
     @DisplayName("Name argument validation - single character")

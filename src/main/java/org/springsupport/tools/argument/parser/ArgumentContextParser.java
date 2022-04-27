@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Component
-public class ArgumentParserImpl implements ArgumentParser {
+public class ArgumentContextParser implements ArgumentParser {
 
     private final static String argumentRegex = "-(n|name|e|exclude) ([a-zA-Z,?]+)$";
 

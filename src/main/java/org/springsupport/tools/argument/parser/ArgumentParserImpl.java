@@ -5,8 +5,6 @@ import org.springsupport.tools.argument.dto.ArgumentMetadata;
 import org.springsupport.tools.argument.exception.ArgumentParseException;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,21 +23,23 @@ public class ArgumentParserImpl implements ArgumentParser {
     }
 
     @Override
-    public List<ArgumentMetadata> parse(@NotNull String arg) throws ArgumentParseException {
+    public ArgumentMetadata parse(@NotNull String arg) throws ArgumentParseException {
         if(arg == null) {
             throw new ArgumentParseException("Argument is null", null);
         }
-
         Matcher argsPatternMatcher = Pattern.compile(argumentRegex)
                                             .matcher(arg);
-        List<ArgumentMetadata> parsedMetadataResults = new ArrayList<>();
+        ArgumentMetadata argumentMetadata = new ArgumentMetadata(arg, null);
+
         if(!argsPatternMatcher.find() || argsPatternMatcher.groupCount() < 2) {
             throw new ArgumentParseException(arg + " is invalid argument", arg);
         }
         String argType = argsPatternMatcher.group(1);
         String argParams = argsPatternMatcher.group(2);
-        parsedMetadataResults.add(new ArgumentMetadata(argType, argParams));
-        return parsedMetadataResults;
+        argumentMetadata.setArgType(argType);
+        argumentMetadata.setArgParams(argParams);
+
+        return argumentMetadata;
     }
 
 }

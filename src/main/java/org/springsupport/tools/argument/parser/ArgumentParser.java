@@ -4,7 +4,6 @@ import org.springsupport.tools.argument.dto.ArgumentMetadata;
 import org.springsupport.tools.argument.exception.ArgumentParseException;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 public interface ArgumentParser {
 
@@ -21,6 +20,6 @@ public interface ArgumentParser {
      *
      * @param arg: One element in the args array
      * */
-    List<ArgumentMetadata> parse(@NotNull String arg) throws ArgumentParseException;
+    ArgumentMetadata parse(@NotNull String arg) throws ArgumentParseException;
 
 }

@@ -7,9 +7,8 @@ import org.springsupport.tools.argument.exception.ArgumentParseException;
 import org.springsupport.tools.argument.parser.ArgumentParser;
 import org.springsupport.tools.argument.parser.ArgumentParserImpl;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ArgumentParserTest {
 
@@ -111,11 +110,10 @@ public class ArgumentParserTest {
     void extract_singleCharacter_nameArgs_values() throws ArgumentParseException {
         String arg = "-n order";
 
-        List<ArgumentMetadata> parsed = argumentParser.parse(arg);
+        ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.size(), 1);
-        assertEquals(parsed.get(0).getArgType(), "n");
-        assertEquals(parsed.get(0).getArgParams(), "order");
+        assertEquals(parsed.getArgType(), "n");
+        assertEquals(parsed.getArgParams(), "order");
     }
 
     @Test
@@ -123,11 +121,10 @@ public class ArgumentParserTest {
     void extract_multiCharacter_nameArgs_values() throws ArgumentParseException {
         String arg = "-name order";
 
-        List<ArgumentMetadata> parsed = argumentParser.parse(arg);
+        ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.size(), 1);
-        assertEquals(parsed.get(0).getArgType(), "name");
-        assertEquals(parsed.get(0).getArgParams(), "order");
+        assertEquals(parsed.getArgType(), "name");
+        assertEquals(parsed.getArgParams(), "order");
     }
 
     @Test
@@ -135,11 +132,10 @@ public class ArgumentParserTest {
     void extract_singleCharacter_excludeArgs_values_contains_comma() throws ArgumentParseException {
         String arg = "-e service,controller";
 
-        List<ArgumentMetadata> parsed = argumentParser.parse(arg);
+        ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.size(), 1);
-        assertEquals(parsed.get(0).getArgType(), "e");
-        assertEquals(parsed.get(0).getArgParams(), "service,controller");
+        assertEquals(parsed.getArgType(), "e");
+        assertEquals(parsed.getArgParams(), "service,controller");
     }
 
     @Test
@@ -147,11 +143,10 @@ public class ArgumentParserTest {
     void extract_singleCharacter_excludeArgs_values() throws ArgumentParseException {
         String arg = "-e service";
 
-        List<ArgumentMetadata> parsed = argumentParser.parse(arg);
+        ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.size(), 1);
-        assertEquals(parsed.get(0).getArgType(), "e");
-        assertEquals(parsed.get(0).getArgParams(), "service");
+        assertEquals(parsed.getArgType(), "e");
+        assertEquals(parsed.getArgParams(), "service");
     }
 
     @Test
@@ -159,11 +154,10 @@ public class ArgumentParserTest {
     void extract_multiCharacter_excludeArgs_values_contains_comma() throws ArgumentParseException {
         String arg = "-exclude service,controller";
 
-        List<ArgumentMetadata> parsed = argumentParser.parse(arg);
+        ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.size(), 1);
-        assertEquals(parsed.get(0).getArgType(), "exclude");
-        assertEquals(parsed.get(0).getArgParams(), "service,controller");
+        assertEquals(parsed.getArgType(), "exclude");
+        assertEquals(parsed.getArgParams(), "service,controller");
     }
 
     @Test
@@ -171,11 +165,10 @@ public class ArgumentParserTest {
     void extract_multiCharacter_excludeArgs_values() throws ArgumentParseException {
         String arg = "-exclude service";
 
-        List<ArgumentMetadata> parsed = argumentParser.parse(arg);
+        ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.size(), 1);
-        assertEquals(parsed.get(0).getArgType(), "exclude");
-        assertEquals(parsed.get(0).getArgParams(), "service");
+        assertEquals(parsed.getArgType(), "exclude");
+        assertEquals(parsed.getArgParams(), "service");
     }
 
     @Test

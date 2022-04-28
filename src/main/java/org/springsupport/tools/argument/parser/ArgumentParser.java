@@ -5,7 +5,7 @@ import org.springsupport.tools.argument.exception.ArgumentParseException;
 
 import javax.validation.constraints.NotNull;
 
-public interface ArgumentParser {
+public interface ArgumentParser<Out> {
 
     /**
      * Check the arguments when called main method
@@ -20,6 +20,6 @@ public interface ArgumentParser {
      *
      * @param arg: One element in the args array
      * */
-    ArgumentMetadata parse(@NotNull String arg) throws ArgumentParseException;
+    Out parse(@NotNull String arg) throws ArgumentParseException;
 
 }

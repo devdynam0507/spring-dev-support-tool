@@ -5,12 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.springsupport.tools.argument.dto.ArgumentMetadata;
 import org.springsupport.tools.argument.exception.ArgumentParseException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class ArgumentContextParserTest {
+class ArgumentContextParserTest {
 
-    private ArgumentParser argumentParser = new ArgumentContextParser();
+    private final ArgumentParser<ArgumentMetadata> argumentParser = new ArgumentContextParser();
 
     @Test
     @DisplayName("Name argument validation - single character")
@@ -19,7 +18,7 @@ public class ArgumentContextParserTest {
 
         boolean canParse = argumentParser.canParse(arg);
 
-        assertEquals(canParse, true);
+        assertTrue(canParse);
     }
 
     @Test
@@ -29,7 +28,7 @@ public class ArgumentContextParserTest {
 
         boolean canParse = argumentParser.canParse(arg);
 
-        assertEquals(canParse, true);
+        assertTrue(canParse);
     }
 
 
@@ -40,7 +39,7 @@ public class ArgumentContextParserTest {
 
         boolean canParse = argumentParser.canParse(arg);
 
-        assertEquals(canParse, true);
+        assertTrue(canParse);
     }
 
     @Test
@@ -50,7 +49,7 @@ public class ArgumentContextParserTest {
 
         boolean canParse = argumentParser.canParse(arg);
 
-        assertEquals(canParse, true);
+        assertTrue(canParse);
     }
 
     @Test
@@ -60,7 +59,7 @@ public class ArgumentContextParserTest {
 
         boolean canParse = argumentParser.canParse(arg);
 
-        assertEquals(canParse, true);
+        assertTrue(canParse);
     }
 
     @Test
@@ -70,7 +69,7 @@ public class ArgumentContextParserTest {
 
         boolean canParse = argumentParser.canParse(arg);
 
-        assertEquals(canParse, false);
+        assertFalse(canParse);
     }
 
     @Test
@@ -80,7 +79,7 @@ public class ArgumentContextParserTest {
 
         boolean canParse = argumentParser.canParse(arg);
 
-        assertEquals(canParse, false);
+        assertFalse(canParse);
     }
 
     @Test
@@ -90,7 +89,7 @@ public class ArgumentContextParserTest {
 
         boolean canParse = argumentParser.canParse(arg);
 
-        assertEquals(canParse, false);
+        assertFalse(canParse);
     }
 
     @Test
@@ -100,7 +99,7 @@ public class ArgumentContextParserTest {
 
         boolean canParse = argumentParser.canParse(arg);
 
-        assertEquals(canParse, false);
+        assertFalse(canParse);
     }
 
     @Test
@@ -110,8 +109,8 @@ public class ArgumentContextParserTest {
 
         ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.getArgType(), "n");
-        assertEquals(parsed.getArgParams(), "order");
+        assertEquals("n", parsed.getArgType());
+        assertEquals("order", parsed.getArgParams());
     }
 
     @Test
@@ -121,8 +120,8 @@ public class ArgumentContextParserTest {
 
         ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.getArgType(), "name");
-        assertEquals(parsed.getArgParams(), "order");
+        assertEquals("name", parsed.getArgType());
+        assertEquals("order", parsed.getArgParams());
     }
 
     @Test
@@ -132,8 +131,8 @@ public class ArgumentContextParserTest {
 
         ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.getArgType(), "e");
-        assertEquals(parsed.getArgParams(), "service,controller");
+        assertEquals("e", parsed.getArgType());
+        assertEquals("service,controller", parsed.getArgParams());
     }
 
     @Test
@@ -143,8 +142,8 @@ public class ArgumentContextParserTest {
 
         ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.getArgType(), "e");
-        assertEquals(parsed.getArgParams(), "service");
+        assertEquals("e", parsed.getArgType());
+        assertEquals("service", parsed.getArgParams());
     }
 
     @Test
@@ -154,8 +153,8 @@ public class ArgumentContextParserTest {
 
         ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.getArgType(), "exclude");
-        assertEquals(parsed.getArgParams(), "service,controller");
+        assertEquals("exclude", parsed.getArgType());
+        assertEquals("service,controller", parsed.getArgParams());
     }
 
     @Test
@@ -165,13 +164,13 @@ public class ArgumentContextParserTest {
 
         ArgumentMetadata parsed = argumentParser.parse(arg);
 
-        assertEquals(parsed.getArgType(), "exclude");
-        assertEquals(parsed.getArgParams(), "service");
+        assertEquals("exclude", parsed.getArgType());
+        assertEquals("service", parsed.getArgParams());
     }
 
     @Test
     @DisplayName("Extract args input null")
-    void extractArgsInputNull() throws ArgumentParseException {
+    void extractArgsInputNull() {
         String arg = null;
 
         assertThrows(ArgumentParseException.class, () -> argumentParser.parse(arg));
@@ -179,7 +178,7 @@ public class ArgumentContextParserTest {
 
     @Test
     @DisplayName("Extract invalid args")
-    void extractInvalidArgs() throws ArgumentParseException {
+    void extractInvalidArgs() {
         String arg = "adadad";
 
         assertThrows(ArgumentParseException.class, () -> argumentParser.parse(arg));
@@ -187,7 +186,7 @@ public class ArgumentContextParserTest {
 
     @Test
     @DisplayName("Extract invalid(empty) args")
-    void extractInvalidEmptyArgs() throws ArgumentParseException {
+    void extractInvalidEmptyArgs() {
         String arg = "";
 
         assertThrows(ArgumentParseException.class, () -> argumentParser.parse(arg));

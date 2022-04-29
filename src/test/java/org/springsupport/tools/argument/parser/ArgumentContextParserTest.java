@@ -2,194 +2,86 @@ package org.springsupport.tools.argument.parser;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springsupport.tools.argument.dto.ArgumentMetadata;
+import org.springsupport.tools.argument.dto.ArgumentContextMetadata;
 import org.springsupport.tools.argument.exception.ArgumentParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArgumentContextParserTest {
 
-    private final ArgumentParser<ArgumentMetadata> argumentParser = new ArgumentContextParser();
+    private ArgumentParser<ArgumentContextMetadata> argumentContextParser = new ArgumentContextParser();
 
     @Test
-    @DisplayName("Name argument validation - single character")
-    void name_checkValidArgument_singleCharacter() {
-        String arg = "-n order";
+    @DisplayName("Check parse context")
+    void check_parse_context() {
+        String context = "-n name -e service,controller";
 
-        boolean canParse = argumentParser.canParse(arg);
+        boolean canParse = argumentContextParser.canParse(context);
 
         assertTrue(canParse);
     }
 
     @Test
-    @DisplayName("Name argument validation - multi character")
-    void name_checkValidArgument_multiCharacter() {
-        String arg = "-name order";
+    @DisplayName("Check parse context single")
+    void check_parse_context_single() {
+        String context = "-n name";
 
-        boolean canParse = argumentParser.canParse(arg);
-
-        assertTrue(canParse);
-    }
-
-
-    @Test
-    @DisplayName("Exclude argument validation - single character")
-    void exclude_checkValidArgument_singleCharacter() {
-        String arg = "-e controller";
-
-        boolean canParse = argumentParser.canParse(arg);
+        boolean canParse = argumentContextParser.canParse(context);
 
         assertTrue(canParse);
     }
 
     @Test
-    @DisplayName("Exclude argument validation - multi character")
-    void exclude_checkValidArgument_multiCharacter() {
-        String arg = "-exclude controller";
+    @DisplayName("Check parse context single")
+    void check_parse_context_null() {
+        String context = null;
 
-        boolean canParse = argumentParser.canParse(arg);
-
-        assertTrue(canParse);
-    }
-
-    @Test
-    @DisplayName("Exclude argument validation - multi character contains comma")
-    void exclude_checkValidArgument_multiCharacterContainsComma() {
-        String arg = "-exclude controller,service,hoo";
-
-        boolean canParse = argumentParser.canParse(arg);
-
-        assertTrue(canParse);
-    }
-
-    @Test
-    @DisplayName("Input not specified command1")
-    void inputNotSpecifiedCommand() {
-        String arg = "-notspecified value";
-
-        boolean canParse = argumentParser.canParse(arg);
+        boolean canParse = argumentContextParser.canParse(context);
 
         assertFalse(canParse);
     }
 
     @Test
-    @DisplayName("Input not specified command2")
-    void inputNotSpecifiedCommand2() {
-        String arg = "notspecified value";
+    @DisplayName("Check parse invalid command name")
+    void check_parse_context_invalid_command_name() {
+        String context = "-aaaa vascasca";
 
-        boolean canParse = argumentParser.canParse(arg);
-
-        assertFalse(canParse);
-    }
-
-    @Test
-    @DisplayName("Input not specified command3")
-    void inputNotSpecifiedCommand3() {
-        String arg = "";
-
-        boolean canParse = argumentParser.canParse(arg);
+        boolean canParse = argumentContextParser.canParse(context);
 
         assertFalse(canParse);
     }
 
     @Test
-    @DisplayName("Input null")
-    void inputNull() {
-        String arg = null;
+    @DisplayName("Check parse invalid command name2")
+    void check_parse_context_invalid_command_name2() {
+        String context = "-n Order -bbbb avasawe";
 
-        boolean canParse = argumentParser.canParse(arg);
+        boolean canParse = argumentContextParser.canParse(context);
 
         assertFalse(canParse);
     }
 
     @Test
-    @DisplayName("Extract -n argument values")
-    void extract_singleCharacter_nameArgs_values() throws ArgumentParseException {
-        String arg = "-n order";
+    @DisplayName("parse single argument")
+    void parse_single_argument() throws ArgumentParseException {
+        String context = "-n Order";
 
-        ArgumentMetadata parsed = argumentParser.parse(arg);
+        ArgumentContextMetadata metadata = argumentContextParser.parse(context);
 
-        assertEquals("n", parsed.getArgType());
-        assertEquals("order", parsed.getArgParams());
+        assertEquals(1, metadata.getContexts().size());
+        assertEquals("n Order", metadata.getContexts().get(0));
     }
 
     @Test
-    @DisplayName("Extract -name argument values")
-    void extract_multiCharacter_nameArgs_values() throws ArgumentParseException {
-        String arg = "-name order";
+    @DisplayName("parse two argument")
+    void parse_two_argument() throws ArgumentParseException {
+        String context = "-n Order -e abc";
 
-        ArgumentMetadata parsed = argumentParser.parse(arg);
+        ArgumentContextMetadata metadata = argumentContextParser.parse(context);
 
-        assertEquals("name", parsed.getArgType());
-        assertEquals("order", parsed.getArgParams());
-    }
-
-    @Test
-    @DisplayName("Extract -e argument values contains comma")
-    void extract_singleCharacter_excludeArgs_values_contains_comma() throws ArgumentParseException {
-        String arg = "-e service,controller";
-
-        ArgumentMetadata parsed = argumentParser.parse(arg);
-
-        assertEquals("e", parsed.getArgType());
-        assertEquals("service,controller", parsed.getArgParams());
-    }
-
-    @Test
-    @DisplayName("Extract -e argument values not contains comma")
-    void extract_singleCharacter_excludeArgs_values() throws ArgumentParseException {
-        String arg = "-e service";
-
-        ArgumentMetadata parsed = argumentParser.parse(arg);
-
-        assertEquals("e", parsed.getArgType());
-        assertEquals("service", parsed.getArgParams());
-    }
-
-    @Test
-    @DisplayName("Extract -exclude argument values contains comma")
-    void extract_multiCharacter_excludeArgs_values_contains_comma() throws ArgumentParseException {
-        String arg = "-exclude service,controller";
-
-        ArgumentMetadata parsed = argumentParser.parse(arg);
-
-        assertEquals("exclude", parsed.getArgType());
-        assertEquals("service,controller", parsed.getArgParams());
-    }
-
-    @Test
-    @DisplayName("Extract -exclude argument values not contains comma")
-    void extract_multiCharacter_excludeArgs_values() throws ArgumentParseException {
-        String arg = "-exclude service";
-
-        ArgumentMetadata parsed = argumentParser.parse(arg);
-
-        assertEquals("exclude", parsed.getArgType());
-        assertEquals("service", parsed.getArgParams());
-    }
-
-    @Test
-    @DisplayName("Extract args input null")
-    void extractArgsInputNull() {
-        String arg = null;
-
-        assertThrows(ArgumentParseException.class, () -> argumentParser.parse(arg));
-    }
-
-    @Test
-    @DisplayName("Extract invalid args")
-    void extractInvalidArgs() {
-        String arg = "adadad";
-
-        assertThrows(ArgumentParseException.class, () -> argumentParser.parse(arg));
-    }
-
-    @Test
-    @DisplayName("Extract invalid(empty) args")
-    void extractInvalidEmptyArgs() {
-        String arg = "";
-
-        assertThrows(ArgumentParseException.class, () -> argumentParser.parse(arg));
+        assertEquals(2, metadata.getContexts().size());
+        assertEquals("-n Order", metadata.getContexts().get(0));
+        assertEquals("-e abc", metadata.getContexts().get(1));
     }
 
 }

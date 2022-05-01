@@ -1,25 +1,26 @@
 package org.springsupport.tools.argument.parser;
 
-import org.springsupport.tools.argument.dto.ArgumentMetadata;
-import org.springsupport.tools.argument.exception.ArgumentParseException;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
+
+import org.springsupport.tools.argument.exception.ArgumentParseException;
 
 public interface ArgumentParser<Out> {
 
     /**
      * Check the arguments when called main method
      *
-     * @param arg: One element in the args array
+     * @param args: Command-Line arguments
      * */
-    boolean canParse(@NotNull String arg);
+    boolean canParse(@NotNull String... args);
 
     /**
      * Parses arguments. If an invalid argument is entered,
      * throw an ArgumentParseException exception.
      *
-     * @param arg: One element in the args array
+     * @param args: Command-Line arguments
      * */
-    Out parse(@NotNull String arg) throws ArgumentParseException;
+    List<Out> parse(@NotNull String... args) throws ArgumentParseException;
 
 }

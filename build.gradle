@@ -23,18 +23,11 @@ dependencies {
 
     implementation 'javax.validation:validation-api:2.0.1.Final'
 
-    implementation 'info.picocli:picocli:4.6.3'
-    annotationProcessor 'info.picocli:picocli-codegen:4.6.3'
-
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-}
-
-compileJava {
-    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
 }
 
 test {

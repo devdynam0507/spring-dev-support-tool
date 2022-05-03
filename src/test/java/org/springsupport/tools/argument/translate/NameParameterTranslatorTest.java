@@ -11,6 +11,36 @@ class NameParameterTranslatorTest {
 	private ParameterTranslator nameParameterTranslator = new NameParameterTranslator();
 
 	@Test
+	void check_arg_type_not_null_valid() {
+		String validArgType1 = "-n";
+		String validArgType2 = "-name";
+
+		boolean canTranslateArg1 = nameParameterTranslator.canTranslate(validArgType1);
+		boolean canTranslateArg2 = nameParameterTranslator.canTranslate(validArgType2);
+
+		assertTrue(canTranslateArg1);
+		assertTrue(canTranslateArg2);
+	}
+
+	@Test
+	void check_arg_type_null() {
+		String validArgType1 = null;
+
+		boolean canTranslateArg1 = nameParameterTranslator.canTranslate(validArgType1);
+
+		assertFalse(canTranslateArg1);
+	}
+
+	@Test
+	void check_arg_type_invalid() {
+		String validArgType1 = "oing??";
+
+		boolean canTranslateArg1 = nameParameterTranslator.canTranslate(validArgType1);
+
+		assertFalse(canTranslateArg1);
+	}
+
+	@Test
 	void check_valid_translate() throws Exception {
 		ArgumentPipelineContext context = ArgumentPipelineContext.builder().build();
 		ArgumentMetadata argumentMetadata = new ArgumentMetadata(

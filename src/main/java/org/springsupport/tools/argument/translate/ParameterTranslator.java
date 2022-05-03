@@ -7,6 +7,8 @@ import org.springsupport.tools.argument.dto.ArgumentPipelineContext;
 
 public interface ParameterTranslator {
 
+	 boolean canTranslate(@NotNull String argType);
+
 	/**
 	 * @param argumentPipelineContext The context data storage class of the argument processing pipeline
 	 * @param targetArgumentMetadata Information dto class to be contained in context

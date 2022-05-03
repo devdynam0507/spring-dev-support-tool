@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 public class NameParameterTranslator implements ParameterTranslator {
 
 	@Override
+	public boolean canTranslate(String argType) {
+		return argType != null && (argType.equals("-n") || argType.equals("-name"));
+	}
+
+	@Override
 	public void translate(ArgumentPipelineContext argumentPipelineContext, ArgumentMetadata argumentMetadata) throws Exception {
 		if(argumentMetadata.getArgParams() == null || argumentMetadata.getArgParams().length() <= 0) {
 			throw new InvalidNameArgumentException("invalid input name: " + argumentMetadata.getArgParams(), argumentMetadata.getArgParams());

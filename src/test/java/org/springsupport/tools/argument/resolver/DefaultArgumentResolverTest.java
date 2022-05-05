@@ -38,7 +38,7 @@ class DefaultArgumentResolverTest {
     }
 
     @Test
-    public void failed_resolve() throws Exception {
+    public void failed_resolve() {
         String[] args = new String[] {
                 "-n", "Order", "-l", "java", "-e", "java, service"
         };
@@ -86,7 +86,7 @@ class DefaultArgumentResolverTest {
 
     @Test
     public void exclude_layers_controller() throws Exception {
-        String[] args = new String[] { "-e", "service" };
+        String[] args = new String[] { "-e", "controller" };
 
         ArgumentPipelineContext context = resolver.resolve(args);
         List<SpringStandardLayers> includedLayers = context.getIncludeLayers();

@@ -3,6 +3,7 @@ package org.springsupport.tools.argument.translate;
 import org.springframework.stereotype.Component;
 import org.springsupport.tools.argument.dto.ArgumentMetadata;
 import org.springsupport.tools.argument.dto.ArgumentPipelineContext;
+import org.springsupport.tools.argument.exception.ArgumentResolveException;
 import org.springsupport.tools.argument.exception.InvalidExcludeParameterException;
 import org.springsupport.tools.types.SpringStandardLayers;
 
@@ -12,7 +13,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Component
-public class ExcludeParameterTranslator implements ParameterTranslator {
+public class ExcludeParameterTranslator extends ParameterTranslatorTemplate {
 
 	@Override
 	public boolean canTranslate(String argType) {
@@ -20,7 +21,7 @@ public class ExcludeParameterTranslator implements ParameterTranslator {
 	}
 
 	@Override
-	public void translate(ArgumentPipelineContext argumentPipelineContext, ArgumentMetadata targetArgumentMetadata) throws Exception {
+	public void translate(ArgumentPipelineContext argumentPipelineContext, ArgumentMetadata targetArgumentMetadata) throws ArgumentResolveException {
 		final String argParams = targetArgumentMetadata.getArgParams();
 
 		if(argParams == null) {
@@ -34,16 +35,13 @@ public class ExcludeParameterTranslator implements ParameterTranslator {
 				.replaceAll("\\s", "")
 				.split(",")
 		);
-		checkInvalidSpringLayers(splitParams);
-
-		List<SpringStandardLayers> standardLayers = splitParams
-				.stream()
-				.map(i -> SpringStandardLayers.valueOf(i.toUpperCase(Locale.ROOT)))
-				.collect(Collectors.toList());
-		argumentPipelineContext.setIncludeLayers(standardLayers);
+		checkInvalidSpringLayersIfNotThrows(splitParams);
+		splitParams.forEach(s -> argumentPipelineContext.exclude(
+				SpringStandardLayers.valueOf(s.toUpperCase(Locale.ROOT))
+		));
 	}
 
-	protected void checkInvalidSpringLayers(List<String> splitParams) throws InvalidExcludeParameterException {
+	protected void checkInvalidSpringLayersIfNotThrows(List<String> splitParams) throws InvalidExcludeParameterException {
 		for(String param : splitParams) {
 			if(!SpringStandardLayers.isValid(param)) {
 				throw new InvalidExcludeParameterException("The layer types of parameters to be excluded do not match: " + param, param);

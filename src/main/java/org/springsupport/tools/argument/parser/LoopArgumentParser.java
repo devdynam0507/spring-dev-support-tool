@@ -15,14 +15,14 @@ public class LoopArgumentParser implements ArgumentParser<ArgumentMetadata> {
 
 	@Override
 	public boolean canParse(@NotNull String... args) {
-		return args.length > 1 && args.length % 2 == 0;
+		return args.length == 0 || args.length > 1 && args.length % 2 == 0;
 	}
 
 	@Override
 	public List<ArgumentMetadata> parse(@NotNull String... args) throws ArgumentParseException {
 		if(!canParse(args)) {
 			String argsJoined = String.join(" ", args);
-			throw new ArgumentParseException("invalid argument size: " + argsJoined, argsJoined);
+			throw new ArgumentParseException("invalid argument size: " + args.length, argsJoined);
 		}
 
 		List<ArgumentMetadata> argumentMetadata = new ArrayList<>();

@@ -1,9 +1,11 @@
 package org.springsupport.tools.argument.resolver;
 
+import org.springsupport.tools.argument.dto.ArgumentPipelineContext;
+
 import javax.validation.constraints.NotNull;
 
 public interface ArgumentResolver {
 
-    void resolve(@NotNull final String... args);
+    ArgumentPipelineContext resolve(@NotNull final String... args) throws Exception;
 
 }

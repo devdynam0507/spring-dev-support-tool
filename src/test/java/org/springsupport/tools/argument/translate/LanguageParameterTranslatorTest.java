@@ -5,7 +5,6 @@ import org.springsupport.tools.argument.dto.ArgumentMetadata;
 import org.springsupport.tools.argument.dto.ArgumentPipelineContext;
 import org.springsupport.tools.lang.LanguageNotSupportException;
 import org.springsupport.tools.lang.SupportLanguage;
-import org.springsupport.tools.types.SpringStandardLayers;
 
 import static org.junit.jupiter.api.Assertions.*;
 

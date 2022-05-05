@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Locale;
 
 @Component
-public class LanguageParameterTranslator implements ParameterTranslator {
+public class LanguageParameterTranslator extends ParameterTranslatorTemplate {
 
     @Override
     public boolean canTranslate(String argType) {

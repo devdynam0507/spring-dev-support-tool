@@ -6,6 +6,9 @@ import org.springsupport.tools.argument.dto.ArgumentPipelineContext;
 import org.springsupport.tools.argument.exception.InvalidExcludeParameterException;
 import org.springsupport.tools.types.SpringStandardLayers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExcludeParameterTranslatorTest {
@@ -45,26 +48,28 @@ class ExcludeParameterTranslatorTest {
 	@Test
 	void check_valid_translate() throws Exception {
 		ArgumentPipelineContext context = ArgumentPipelineContext.builder().build();
+		context.setDefaultIncludeLayers();
 		ArgumentMetadata argumentMetadata = new ArgumentMetadata(
 				"-e", "service"
 		);
 
 		excludeParameterTranslator.translate(context, argumentMetadata);
 
-		assertEquals(SpringStandardLayers.SERVICE, context.getIncludeLayers().get(0));
+		assertFalse(context.getIncludeLayers().contains(SpringStandardLayers.SERVICE));
 	}
 
 	@Test
 	void check_valid_translate2() throws Exception {
 		ArgumentPipelineContext context = ArgumentPipelineContext.builder().build();
+		context.setDefaultIncludeLayers();
 		ArgumentMetadata argumentMetadata = new ArgumentMetadata(
 				"-e", "service, controller"
 		);
 
 		excludeParameterTranslator.translate(context, argumentMetadata);
 
-		assertEquals(SpringStandardLayers.SERVICE, context.getIncludeLayers().get(0));
-		assertEquals(SpringStandardLayers.CONTROLLER, context.getIncludeLayers().get(1));
+		assertFalse(context.getIncludeLayers().contains(SpringStandardLayers.SERVICE));
+		assertFalse(context.getIncludeLayers().contains(SpringStandardLayers.CONTROLLER));
 	}
 
 	@Test

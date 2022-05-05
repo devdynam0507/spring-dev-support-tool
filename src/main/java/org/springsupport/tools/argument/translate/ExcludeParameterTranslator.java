@@ -1,16 +1,17 @@
 package org.springsupport.tools.argument.translate;
 
+import org.springframework.stereotype.Component;
+import org.springsupport.tools.argument.dto.ArgumentMetadata;
+import org.springsupport.tools.argument.dto.ArgumentPipelineContext;
+import org.springsupport.tools.argument.exception.InvalidExcludeParameterException;
+import org.springsupport.tools.types.SpringStandardLayers;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import org.springsupport.tools.argument.dto.ArgumentMetadata;
-import org.springsupport.tools.argument.dto.ArgumentPipelineContext;
-import org.springsupport.tools.argument.exception.InvalidExcludeParameterException;
-import org.springsupport.tools.lang.SupportLanguage;
-import org.springsupport.tools.types.SpringStandardLayers;
-
+@Component
 public class ExcludeParameterTranslator implements ParameterTranslator {
 
 	@Override

@@ -3,6 +3,7 @@ package org.springsupport.tools.argument.translate;
 import org.junit.jupiter.api.Test;
 import org.springsupport.tools.argument.dto.ArgumentMetadata;
 import org.springsupport.tools.argument.dto.ArgumentPipelineContext;
+import org.springsupport.tools.lang.LanguageNotSupportException;
 import org.springsupport.tools.lang.SupportLanguage;
 import org.springsupport.tools.types.SpringStandardLayers;
 
@@ -88,6 +89,16 @@ class LanguageParameterTranslatorTest {
         languageParameterTranslator.translate(context, argumentMetadata);
 
         assertEquals(SupportLanguage.JAVA, context.getLanguage());
+    }
+
+    @Test
+    void check_valid_translate_invalid() throws Exception {
+        ArgumentPipelineContext context = ArgumentPipelineContext.builder().build();
+        ArgumentMetadata argumentMetadata = new ArgumentMetadata(
+                "-l", "aaa"
+        );
+
+        assertThrows(LanguageNotSupportException.class, () -> languageParameterTranslator.translate(context, argumentMetadata));
     }
 
 }

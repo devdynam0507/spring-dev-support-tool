@@ -3,7 +3,7 @@ package org.springsupport.tools.argument.translate;
 import org.springframework.stereotype.Component;
 import org.springsupport.tools.argument.dto.ArgumentMetadata;
 import org.springsupport.tools.argument.dto.ArgumentPipelineContext;
-import org.springsupport.tools.argument.exception.LanguageNotSupportException;
+import org.springsupport.tools.lang.LanguageNotSupportException;
 import org.springsupport.tools.lang.SupportLanguage;
 
 import javax.validation.constraints.NotNull;

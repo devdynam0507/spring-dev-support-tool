@@ -29,8 +29,6 @@ class DefaultTemplateRendererTest {
 
         List<TemplateContent> contents = templateRenderer.render("", context);
 
-        for
-
         assertEquals(contents.size(), 4);
         assertTrue(contents.get(0).getContent().contains("Awesome"));
         assertTrue(contents.get(1).getContent().contains("Awesome"));

@@ -19,7 +19,7 @@ public class JavaTemplateWriter implements TemplateWriter {
 
 	@Override
 	public void write(String rootPath, List<TemplateContent> renderedContents) {
-
+		System.out.println("");
 	}
 
 }

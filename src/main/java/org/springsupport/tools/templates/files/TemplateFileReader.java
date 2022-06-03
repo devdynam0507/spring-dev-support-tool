@@ -3,7 +3,6 @@ package org.springsupport.tools.templates.files;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 import org.springsupport.tools.lang.SupportLanguage;
-import org.springsupport.tools.templates.exception.TemplateFileNotFoundException;
 import org.springsupport.tools.types.SpringStandardLayers;
 
 import javax.validation.constraints.NotEmpty;

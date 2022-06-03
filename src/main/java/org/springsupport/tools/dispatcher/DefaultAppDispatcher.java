@@ -12,6 +12,7 @@ import org.springsupport.tools.lang.SupportLanguage;
 import org.springsupport.tools.templates.TemplateRenderer;
 import org.springsupport.tools.templates.TemplateWriter;
 import org.springsupport.tools.templates.files.TemplateContent;
+import org.springsupport.tools.templates.strategy.TemplateStrategySupport;
 
 import javax.validation.constraints.NotNull;
 
@@ -23,31 +24,20 @@ public class DefaultAppDispatcher implements AppDispatcher {
     private static final String TEMPLATE_WRITER_NAME = "TemplateWriter";
 
 	private final ArgumentResolver argumentResolver;
-    private final Map<String, TemplateRenderer> templateRendererMap;
-    private final Map<String, TemplateWriter> templateWriterMap;
+    private final TemplateStrategySupport templateStrategySupport;
 
     @Override
     public void doDispatch(@NotNull String... args) {
         try {
             ArgumentPipelineContext argumentPipelineContext = argumentResolver.resolve(args);
-            TemplateRenderer renderer = getTemplateRendererStrategy(argumentPipelineContext.getLanguage());
-            TemplateWriter writer = getTemplateWriterStrategy(argumentPipelineContext.getLanguage());
+            TemplateRenderer renderer = templateStrategySupport.getTemplateRenderer(argumentPipelineContext.getLanguage());
+            TemplateWriter writer = templateStrategySupport.getTemplateWriter(argumentPipelineContext.getLanguage());
             List<TemplateContent> renderedContents = renderer.render("", argumentPipelineContext);
 
             writer.write(renderedContents, argumentPipelineContext.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public TemplateRenderer getTemplateRendererStrategy(SupportLanguage language) {
-    	final String templateClassName = language.name().toLowerCase(Locale.ROOT) + TEMPLATE_RENDERER_NAME;
-    	return templateRendererMap.get(templateClassName);
-	}
-
-    public TemplateWriter getTemplateWriterStrategy(SupportLanguage language) {
-        final String templateClassName = language.name().toLowerCase(Locale.ROOT) + TEMPLATE_WRITER_NAME;
-        return templateWriterMap.get(templateClassName);
     }
 
 }

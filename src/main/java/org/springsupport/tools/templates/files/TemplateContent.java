@@ -9,6 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TemplateContent {
 
+    private String templateName;
     private String content;
 
 }

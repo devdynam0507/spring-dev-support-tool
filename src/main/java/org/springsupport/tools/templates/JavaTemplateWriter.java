@@ -37,7 +37,7 @@ public class JavaTemplateWriter implements TemplateWriter {
 	}
 
 	private FileWriter getFileWriter(@NotNull final String rootDirectory, String fileNameWithDirectory) throws IOException {
-		FileWriter fileWriter = new FileWriter(rootDirectory + fileNameWithDirectory);
+		FileWriter fileWriter = new FileWriter(rootDirectory + "/" + fileNameWithDirectory);
 		return fileWriter;
 	}
 

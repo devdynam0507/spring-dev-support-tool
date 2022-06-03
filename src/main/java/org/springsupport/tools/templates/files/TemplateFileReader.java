@@ -36,7 +36,7 @@ public class TemplateFileReader {
                 }
 
                 String lines = readAllLines(file);
-                templateContent.add(new TemplateContent(lines));
+                templateContent.add(new TemplateContent(getFileNameWithoutExtension(file.getName()), lines));
             }
         }
         catch (IOException e) {
